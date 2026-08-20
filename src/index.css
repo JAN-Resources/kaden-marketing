@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Michroma&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-inter:    'Inter', sans-serif;
+  --font-michroma: 'Michroma', sans-serif;
+
+  /* Matches the dashboard dark chrome */
+  --color-canvas:     #0c0c0e;
+  --color-surface:    #161618;
+  --color-raised:     #222226;
+  --color-rim:        rgba(255,255,255,0.08);
+  --color-ink:        #f4f4f5;
+  --color-ink-dim:    #a1a1aa;
+  --color-ink-faint:  #63636b;
+  /* Dashboard accent palette — same tokens as the main app */
+  --color-accent:     #4ade80;   /* green-400  — online / auto / success  */
+  --color-amber:      #fbbf24;   /* amber-400  — warning / low inventory  */
+  --color-red:        #f87171;   /* red-400    — alarm / error            */
+  --color-blue:       #60a5fa;   /* blue-400   — info / data highlights   */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0; padding: 0;
+  height: 100%; width: 100%;
+  background: #0c0c0e;
+  color: #f4f4f5;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ── Glass cards — identical to .dark .glass-panel in the dashboard ── */
+.glass {
+  background: rgba(22, 22, 24, 0.72);
+  backdrop-filter: blur(20px) saturate(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  border-radius: 1.25rem;
+}
+.glass-sm {
+  background: rgba(22, 22, 24, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.75rem;
+}
+
+/* ── Animations ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-dot {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.25; }
+}
+@keyframes flow-dash {
+  to { stroke-dashoffset: -26; }
+}
+@keyframes bubble-rise {
+  0%   { transform: translateY(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-60px); opacity: 0; }
+}
+@keyframes liquid-wave {
+  0%,100% { d: path("M0,0 Q25,-3 50,0 Q75,3 100,0 L100,100 L0,100 Z"); }
+  50%     { d: path("M0,0 Q25,3 50,0 Q75,-3 100,0 L100,100 L0,100 Z"); }
+}
+@keyframes typing-cursor {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up    { animation: fade-up 0.55s ease both; }
+.animate-fade-in    { animation: fade-in 0.45s ease both; }
+.animate-slide-down { animation: slide-down 0.45s ease both; }
+.animate-pulse-dot  { animation: pulse-dot 1.8s ease-in-out infinite; }
+
+/* Stagger delays */
+.delay-100 { animation-delay: 0.10s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.30s; }
+.delay-400 { animation-delay: 0.40s; }
+.delay-500 { animation-delay: 0.50s; }
+.delay-600 { animation-delay: 0.60s; }
+.delay-700 { animation-delay: 0.70s; }
+.delay-800 { animation-delay: 0.80s; }
+.delay-900 { animation-delay: 0.90s; }
+
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
