@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from 'lucide-react';
 import { DemoSlide } from '../components/demo/DemoSlide';
@@ -18,56 +18,30 @@ import { SlideScheduling } from '../components/demo/SlideScheduling';
 import { SlideMarketplace } from '../components/demo/SlideMarketplace';
 import { SlideSavings } from '../components/demo/SlideSavings';
 import { SlideCTA } from '../components/demo/SlideCTA';
+import { NARRATION } from '../demo/narration';
+import { useVoice } from '../hooks/useVoice';
 
-/* Pick the best-sounding female voice available in the browser.
-   On Windows: Microsoft Aria/Jenny Online (Natural) sound excellent.
-   On macOS: Samantha / Karen are natural-sounding. */
-let _cachedVoice: SpeechSynthesisVoice | null | undefined;
-function getBestFemaleVoice(): SpeechSynthesisVoice | null {
-  if (_cachedVoice !== undefined) return _cachedVoice;
-  const all = window.speechSynthesis.getVoices();
-  if (!all.length) return null;
+const COMPONENTS: Record<string, typeof SlideHero> = {
+  hero:         SlideHero,
+  problem:      SlideProblem,
+  platform:     SlidePlatform,
+  monitoring:   SlideMonitoring,
+  scrubber:     SlideScrubber,
+  dosing:       SlideDosing,
+  dashboard:    SlideDashboard,
+  alerts:       SlideAlerts,
+  surveillance: SlideSurveillance,
+  chat:         SlideChat,
+  analytics:    SlideAnalytics,
+  scheduling:   SlideScheduling,
+  marketplace:  SlideMarketplace,
+  savings:      SlideSavings,
+  cta:          SlideCTA,
+};
 
-  const PREFERRED = [
-    'Microsoft Aria Online (Natural) - English (United States)',
-    'Microsoft Jenny Online (Natural) - English (United States)',
-    'Microsoft Ava Online (Natural) - English (United States)',
-    'Microsoft Emma Online (Natural) - English (United Kingdom)',
-    'Google US English',
-    'Samantha',
-    'Karen',
-    'Victoria',
-    'Moira',
-    'Tessa',
-  ];
-  for (const name of PREFERRED) {
-    const v = all.find(v => v.name === name);
-    if (v) { _cachedVoice = v; return v; }
-  }
-  const MALE = ['david', 'mark', 'james', 'guy', 'fred', 'arthur', 'george', 'thomas', 'oliver'];
-  _cachedVoice = all.find(v =>
-    v.lang.startsWith('en') && !MALE.some(m => v.name.toLowerCase().includes(m))
-  ) ?? all.find(v => v.lang.startsWith('en')) ?? null;
-  return _cachedVoice;
-}
-
-const SLIDES = [
-  { id: 'hero',        Component: SlideHero,        voice: 'Meet Kayden AI. Autonomous H2S control for the modern gas field.',                                                                                                                            maxDuration: 10000 },
-  { id: 'problem',     Component: SlideProblem,     voice: 'For years, managing H2S meant driving to remote sites, adjusting pumps by hand, and hoping nothing drifted out of spec between visits. Reactive. Expensive. And it still missed things.',    maxDuration: 14000 },
-  { id: 'platform',    Component: SlidePlatform,    voice: 'Kayden connects to every site you operate - anywhere in the world - and keeps watch around the clock, without a single site visit.',                                                        maxDuration: 12000 },
-  { id: 'monitoring',  Component: SlideMonitoring,  voice: 'Every few seconds, Kayden reads your field instruments directly. Inlet H2S, outlet H2S, gas flow - all live, all the time.',                                                               maxDuration: 11000 },
-  { id: 'scrubber',    Component: SlideScrubber,    voice: 'Your scrubber tower, fully instrumented. Kayden watches every zone - packing beds, sump level, inlet and outlet conditions - all in real time.',                                            maxDuration: 12000 },
-  { id: 'dosing',      Component: SlideDosing,      voice: 'Kayden calculates the optimal triazene dose for current conditions and writes that command directly to your pump. No call. No truck. No guesswork.',                                        maxDuration: 12000 },
-  { id: 'dashboard',   Component: SlideDashboard,   voice: 'This is Kayden in action. Live tag readings update every few seconds. The scrubber diagram shows real instrument data. The dosing panel is in Auto - writing commands to the pump without any manual input.', maxDuration: 14000 },
-  { id: 'alerts',        Component: SlideAlerts,        voice: 'The moment any condition crosses a limit, you get a text on your phone instantly - before it becomes a problem.',                                                                                                     maxDuration: 11000 },
-  { id: 'surveillance', Component: SlideSurveillance, voice: 'Kayden also watches your site with AI vision. It detects chemical leaks in real time, identifies every worker on site, and checks PPE compliance - flagging anyone without a hard hat and alerting supervisors instantly.', maxDuration: 15000 },
-  { id: 'chat',        Component: SlideChat,        voice: 'Have a question about your site? Just ask Kayden. It analyzes your live data and answers in plain language - no spreadsheet digging required.',                                              maxDuration: 13000 },
-  { id: 'analytics',   Component: SlideAnalytics,   voice: 'Every week, Kayden builds your analytics report automatically - efficiency trends, chemical usage, uptime - delivered to your inbox.',                                                       maxDuration: 12000 },
-  { id: 'scheduling',  Component: SlideScheduling,  voice: 'Kayden tracks your chemical inventory in real time and predicts exactly when each tank will run dry. It then lets you schedule the refill visit - and any other maintenance - all from one place.',  maxDuration: 14000 },
-  { id: 'marketplace', Component: SlideMarketplace, voice: 'And when you need supplies or spares, the Kayden marketplace knows your exact site configuration. Every item is pre-matched to your equipment - just order and ship direct to site.',         maxDuration: 13000 },
-  { id: 'savings',     Component: SlideSavings,     voice: 'Less triazene wasted. Less labor. No towers out of spec. Kayden pays for itself.',                                                                                                           maxDuration: 10000 },
-  { id: 'cta',         Component: SlideCTA,         voice: "Ready to put your H2S control on autopilot? Let's talk.",                                                                                                                                   maxDuration: Infinity },
-] as const;
+/* Slide order, narration text and fallback pacing all come from src/demo/narration.ts,
+   which is also what scripts/generate-voice.mjs renders to public/voice/<id>.mp3. */
+const SLIDES = NARRATION.map(n => ({ ...n, Component: COMPONENTS[n.id] }));
 
 export function DemoPage() {
   const [current, setCurrent]       = useState(0);
@@ -76,6 +50,8 @@ export function DemoPage() {
   const [muted, setMuted]           = useState(false);
   const [paused, setPaused]         = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
+
+  const { speak, cancel: cancelVoice, prime: primeVoice } = useVoice();
 
   const genRef          = useRef(0);
   const timerIds        = useRef<number[]>([]);
@@ -93,42 +69,14 @@ export function DemoPage() {
     genRef.current++;
     timerIds.current.forEach(id => { clearTimeout(id); clearInterval(id); });
     timerIds.current = [];
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-  }, []);
-
-  const speak = useCallback((text: string, onEnd: () => void) => {
-    if (!('speechSynthesis' in window)) { onEnd(); return; }
-
-    // Split into sentences so each chunk stays well under Chrome's ~15s speech limit
-    const chunks = text.match(/[^.!?]+[.!?]*/g)?.map(s => s.trim()).filter(Boolean) ?? [text];
-    const voice = getBestFemaleVoice();
-    let idx = 0;
-    let cancelled = false;
-
-    const playNext = () => {
-      if (cancelled) return;
-      if (idx >= chunks.length) { onEnd(); return; }
-      const utt = new SpeechSynthesisUtterance(chunks[idx++]);
-      utt.rate  = 0.87;
-      utt.pitch = 0.95;
-      if (voice) utt.voice = voice;
-      utt.onend = playNext;
-      utt.onerror = (e) => {
-        const code = (e as SpeechSynthesisErrorEvent).error;
-        if (code === 'canceled' || code === 'interrupted') { cancelled = true; return; }
-        playNext();
-      };
-      window.speechSynthesis.speak(utt);
-    };
-
-    playNext();
-  }, []);
+    cancelVoice();
+  }, [cancelVoice]);
 
   const runSlide = useCallback((slideIndex: number) => {
     const gen = ++genRef.current;
     timerIds.current.forEach(id => { clearTimeout(id); clearInterval(id); });
     timerIds.current = [];
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    cancelVoice();
 
     const slide = SLIDES[slideIndex];
     if (slide.maxDuration === Infinity) return;
@@ -148,9 +96,10 @@ export function DemoPage() {
       // Voice drives the timing; 45s emergency cap only fires if speech hangs entirely
       const capId = window.setTimeout(advance, 45000) as unknown as number;
       timerIds.current.push(capId);
-      speak(slide.voice, () => {
+      speak(slide.id, () => {
         if (stale()) return;
-        const t = window.setTimeout(advance, 1500) as unknown as number;
+        // Clips already carry ~260ms of tail silence, so this is just the turn beat
+        const t = window.setTimeout(advance, 850) as unknown as number;
         timerIds.current.push(t);
       });
     } else {
@@ -158,7 +107,7 @@ export function DemoPage() {
       const t = window.setTimeout(advance, slide.maxDuration) as unknown as number;
       timerIds.current.push(t);
     }
-  }, [speak]);
+  }, [speak, cancelVoice]);
 
   /* Restart slide runner whenever the slide or audio state changes */
   useEffect(() => {
@@ -197,10 +146,11 @@ export function DemoPage() {
 
   /* "Get a Tour" â€” satisfies browser autoplay policy, starts tour + audio */
   const handleStart = useCallback(() => {
+    primeVoice();
     setStarted(true);
     setAudioEnabled(true);
     setMuted(false);
-  }, []);
+  }, [primeVoice]);
 
   const handleVolumeClick = useCallback(() => setMuted(m => !m), []);
 
