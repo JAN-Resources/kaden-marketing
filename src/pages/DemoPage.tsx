@@ -253,8 +253,8 @@ export function DemoPage() {
               </span>
             </div>
 
-            {/* Centre: Kaden brand — hidden on hero slide (it has its own large one) */}
-            {current !== 0 && (
+            {/* Centre: Kaden brand — hidden on hero and CTA slides (they have their own large one) */}
+            {current !== 0 && current !== SLIDES.length - 1 && (
               <div className="flex items-center justify-center gap-2 pt-3">
                 <KadenBrandMark className="w-5 h-5" color="rgba(255,255,255,0.45)" gradientId="topbar-kb" />
                 <span className="text-[11px] font-bold tracking-[0.18em] text-white/35" style={{ fontFamily: "'Michroma', sans-serif" }}>
@@ -262,7 +262,7 @@ export function DemoPage() {
                 </span>
               </div>
             )}
-            {current === 0 && <div />}
+            {(current === 0 || current === SLIDES.length - 1) && <div />}
 
             {/* Right: slide counter + pause */}
             <div className="flex items-center justify-end gap-4 pt-1">
