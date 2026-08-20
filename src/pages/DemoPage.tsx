@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+﻿import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from 'lucide-react';
 import { DemoSlide } from '../components/demo/DemoSlide';
@@ -51,20 +51,20 @@ function getBestFemaleVoice(): SpeechSynthesisVoice | null {
 }
 
 const SLIDES = [
-  { id: 'hero',        Component: SlideHero,        voice: 'Meet Kaden AI. Autonomous H2S control for the modern gas field.',                                                                                                                            maxDuration: 10000 },
+  { id: 'hero',        Component: SlideHero,        voice: 'Meet Kayden AI. Autonomous H2S control for the modern gas field.',                                                                                                                            maxDuration: 10000 },
   { id: 'problem',     Component: SlideProblem,     voice: 'For years, managing H2S meant driving to remote sites, adjusting pumps by hand, and hoping nothing drifted out of spec between visits. Reactive. Expensive. And it still missed things.',    maxDuration: 14000 },
-  { id: 'platform',    Component: SlidePlatform,    voice: 'Kaden connects to every site you operate - anywhere in the world - and keeps watch around the clock, without a single site visit.',                                                        maxDuration: 12000 },
-  { id: 'monitoring',  Component: SlideMonitoring,  voice: 'Every few seconds, Kaden reads your field instruments directly. Inlet H2S, outlet H2S, gas flow - all live, all the time.',                                                               maxDuration: 11000 },
-  { id: 'scrubber',    Component: SlideScrubber,    voice: 'Your scrubber tower, fully instrumented. Kaden watches every zone - packing beds, sump level, inlet and outlet conditions - all in real time.',                                            maxDuration: 12000 },
-  { id: 'dosing',      Component: SlideDosing,      voice: 'Kaden calculates the optimal triazene dose for current conditions and writes that command directly to your pump. No call. No truck. No guesswork.',                                        maxDuration: 12000 },
-  { id: 'dashboard',   Component: SlideDashboard,   voice: 'This is Kaden in action. Live tag readings update every few seconds. The scrubber diagram shows real instrument data. The dosing panel is in Auto - writing commands to the pump without any manual input.', maxDuration: 14000 },
+  { id: 'platform',    Component: SlidePlatform,    voice: 'Kayden connects to every site you operate - anywhere in the world - and keeps watch around the clock, without a single site visit.',                                                        maxDuration: 12000 },
+  { id: 'monitoring',  Component: SlideMonitoring,  voice: 'Every few seconds, Kayden reads your field instruments directly. Inlet H2S, outlet H2S, gas flow - all live, all the time.',                                                               maxDuration: 11000 },
+  { id: 'scrubber',    Component: SlideScrubber,    voice: 'Your scrubber tower, fully instrumented. Kayden watches every zone - packing beds, sump level, inlet and outlet conditions - all in real time.',                                            maxDuration: 12000 },
+  { id: 'dosing',      Component: SlideDosing,      voice: 'Kayden calculates the optimal triazene dose for current conditions and writes that command directly to your pump. No call. No truck. No guesswork.',                                        maxDuration: 12000 },
+  { id: 'dashboard',   Component: SlideDashboard,   voice: 'This is Kayden in action. Live tag readings update every few seconds. The scrubber diagram shows real instrument data. The dosing panel is in Auto - writing commands to the pump without any manual input.', maxDuration: 14000 },
   { id: 'alerts',        Component: SlideAlerts,        voice: 'The moment any condition crosses a limit, you get a text on your phone instantly - before it becomes a problem.',                                                                                                     maxDuration: 11000 },
-  { id: 'surveillance', Component: SlideSurveillance, voice: 'Kaden also watches your site with AI vision. It detects chemical leaks in real time, identifies every worker on site, and checks PPE compliance - flagging anyone without a hard hat and alerting supervisors instantly.', maxDuration: 15000 },
-  { id: 'chat',        Component: SlideChat,        voice: 'Have a question about your site? Just ask Kaden. It analyzes your live data and answers in plain language - no spreadsheet digging required.',                                              maxDuration: 13000 },
-  { id: 'analytics',   Component: SlideAnalytics,   voice: 'Every week, Kaden builds your analytics report automatically - efficiency trends, chemical usage, uptime - delivered to your inbox.',                                                       maxDuration: 12000 },
-  { id: 'scheduling',  Component: SlideScheduling,  voice: 'Kaden tracks your chemical inventory in real time and predicts exactly when each tank will run dry. It then lets you schedule the refill visit - and any other maintenance - all from one place.',  maxDuration: 14000 },
-  { id: 'marketplace', Component: SlideMarketplace, voice: 'And when you need supplies or spares, the Kaden marketplace knows your exact site configuration. Every item is pre-matched to your equipment - just order and ship direct to site.',         maxDuration: 13000 },
-  { id: 'savings',     Component: SlideSavings,     voice: 'Less triazene wasted. Less labor. No towers out of spec. Kaden pays for itself.',                                                                                                           maxDuration: 10000 },
+  { id: 'surveillance', Component: SlideSurveillance, voice: 'Kayden also watches your site with AI vision. It detects chemical leaks in real time, identifies every worker on site, and checks PPE compliance - flagging anyone without a hard hat and alerting supervisors instantly.', maxDuration: 15000 },
+  { id: 'chat',        Component: SlideChat,        voice: 'Have a question about your site? Just ask Kayden. It analyzes your live data and answers in plain language - no spreadsheet digging required.',                                              maxDuration: 13000 },
+  { id: 'analytics',   Component: SlideAnalytics,   voice: 'Every week, Kayden builds your analytics report automatically - efficiency trends, chemical usage, uptime - delivered to your inbox.',                                                       maxDuration: 12000 },
+  { id: 'scheduling',  Component: SlideScheduling,  voice: 'Kayden tracks your chemical inventory in real time and predicts exactly when each tank will run dry. It then lets you schedule the refill visit - and any other maintenance - all from one place.',  maxDuration: 14000 },
+  { id: 'marketplace', Component: SlideMarketplace, voice: 'And when you need supplies or spares, the Kayden marketplace knows your exact site configuration. Every item is pre-matched to your equipment - just order and ship direct to site.',         maxDuration: 13000 },
+  { id: 'savings',     Component: SlideSavings,     voice: 'Less triazene wasted. Less labor. No towers out of spec. Kayden pays for itself.',                                                                                                           maxDuration: 10000 },
   { id: 'cta',         Component: SlideCTA,         voice: "Ready to put your H2S control on autopilot? Let's talk.",                                                                                                                                   maxDuration: Infinity },
 ] as const;
 
@@ -188,7 +188,7 @@ export function DemoPage() {
     });
   }, [current, runSlide, stopAll]);
 
-  /* "Get a Tour" — satisfies browser autoplay policy, starts tour + audio */
+  /* "Get a Tour" â€” satisfies browser autoplay policy, starts tour + audio */
   const handleStart = useCallback(() => {
     setStarted(true);
     setAudioEnabled(true);
@@ -299,3 +299,4 @@ export function DemoPage() {
     </div>
   );
 }
+
