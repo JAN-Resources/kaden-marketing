@@ -99,12 +99,13 @@ export function SlideHero({ started, onStart }: Props) {
             Tap arrows or swipe to navigate
           </p>
         )}
+      </div>
 
-        <div className="animate-fade-up delay-700 absolute bottom-4 sm:bottom-8">
-          <img src={`${import.meta.env.BASE_URL}logo/janresources.png`} alt="Jan Resources"
-            className="h-7 sm:h-9 object-contain opacity-35"
-            style={{ filter: 'brightness(0) invert(1)' }} />
-        </div>
+      {/* Logo pinned to bottom of slide, outside the content column */}
+      <div className="animate-fade-up delay-700 absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2">
+        <img src={`${import.meta.env.BASE_URL}logo/janresources.png`} alt="Jan Resources"
+          className="h-7 sm:h-9 object-contain opacity-35"
+          style={{ filter: 'brightness(0) invert(1)' }} />
       </div>
     </div>
   );
