@@ -209,7 +209,7 @@ export function DemoPage() {
   }, [next, prev, togglePause, handleVolumeClick]);
 
   const SlideComp = SLIDES[current].Component;
-  const volumeIcon  = muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />;
+  const volumeIcon  = muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />;
   const volumeTitle = muted ? 'Unmute (M)' : 'Mute (M)';
 
   return (
@@ -236,27 +236,30 @@ export function DemoPage() {
           </div>
 
           {/* Top bar */}
-          <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-4 pb-2">
-            <div className="flex items-center gap-2">
+          <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-3 pb-2">
+            <div className="flex flex-col items-start">
               <button
                 onClick={handleVolumeClick}
-                className="p-2 rounded-full transition-all"
-                style={{ color: muted ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.7)' }}
+                className="p-3 rounded-full transition-all"
+                style={{ color: muted ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.75)' }}
                 title={volumeTitle}
               >
                 {volumeIcon}
               </button>
+              <span className="text-[11px] font-mono tracking-widest pl-1 transition-colors" style={{ color: muted ? 'rgba(255,255,255,0.2)' : 'rgba(52,211,153,0.65)' }}>
+                {muted ? 'TAP TO ENABLE' : 'AUDIO ON'}
+              </span>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono text-white/20 tabular-nums">
+            <div className="flex items-center gap-4">
+              <span className="text-sm font-mono text-white/35 tabular-nums">
                 {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
               </span>
               <button
                 onClick={togglePause}
-                className="p-2 rounded-full text-white/30 hover:text-white/70 hover:bg-white/[0.06] transition-all"
+                className="p-3 rounded-full text-white/45 hover:text-white/80 hover:bg-white/[0.06] transition-all"
                 title={paused ? 'Resume (Space)' : 'Pause (Space)'}
               >
-                {paused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+                {paused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
               </button>
             </div>
           </div>
