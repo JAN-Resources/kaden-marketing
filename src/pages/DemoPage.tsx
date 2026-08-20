@@ -97,26 +97,31 @@ export function DemoPage() {
   }, []);
 
   const speak = useCallback((text: string, onEnd: () => void) => {
-    if (!('speechSynthesis' in window)) {
-      onEnd();
-      return;
-    }
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.rate  = 0.87;
-    utt.pitch = 0.95;
-    const femaleVoice = getBestFemaleVoice();
-    if (femaleVoice) utt.voice = femaleVoice;
-    utt.onend = onEnd;
-    utt.onerror = (e) => {
-      const code = (e as SpeechSynthesisErrorEvent).error;
-      if (code === 'canceled' || code === 'interrupted') return;
-      onEnd();
+    if (!('speechSynthesis' in window)) { onEnd(); return; }
+
+    // Split into sentences so each chunk stays well under Chrome's ~15s speech limit
+    const chunks = text.match(/[^.!?]+[.!?]*/g)?.map(s => s.trim()).filter(Boolean) ?? [text];
+    const voice = getBestFemaleVoice();
+    let idx = 0;
+    let cancelled = false;
+
+    const playNext = () => {
+      if (cancelled) return;
+      if (idx >= chunks.length) { onEnd(); return; }
+      const utt = new SpeechSynthesisUtterance(chunks[idx++]);
+      utt.rate  = 0.87;
+      utt.pitch = 0.95;
+      if (voice) utt.voice = voice;
+      utt.onend = playNext;
+      utt.onerror = (e) => {
+        const code = (e as SpeechSynthesisErrorEvent).error;
+        if (code === 'canceled' || code === 'interrupted') { cancelled = true; return; }
+        playNext();
+      };
+      window.speechSynthesis.speak(utt);
     };
-    window.speechSynthesis.speak(utt);
-    const resumeId = window.setInterval(() => {
-      if (window.speechSynthesis.paused) window.speechSynthesis.resume();
-    }, 5000) as unknown as number;
-    timerIds.current.push(resumeId);
+
+    playNext();
   }, []);
 
   const runSlide = useCallback((slideIndex: number) => {
@@ -139,17 +144,18 @@ export function DemoPage() {
       setCurrent(c => Math.min(c + 1, SLIDES.length - 1));
     };
 
-    const capId = window.setTimeout(advance, slide.maxDuration) as unknown as number;
-    timerIds.current.push(capId);
-
     if (audioEnabledRef.current && !mutedRef.current) {
+      // Voice drives the timing; 45s emergency cap only fires if speech hangs entirely
+      const capId = window.setTimeout(advance, 45000) as unknown as number;
+      timerIds.current.push(capId);
       speak(slide.voice, () => {
         if (stale()) return;
-        const t = window.setTimeout(advance, 1800) as unknown as number;
+        const t = window.setTimeout(advance, 1500) as unknown as number;
         timerIds.current.push(t);
       });
     } else {
-      const t = window.setTimeout(advance, 6000) as unknown as number;
+      // No audio — use maxDuration to pace the slides
+      const t = window.setTimeout(advance, slide.maxDuration) as unknown as number;
       timerIds.current.push(t);
     }
   }, [speak]);
