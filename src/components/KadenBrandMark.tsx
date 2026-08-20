@@ -11,12 +11,13 @@ interface Props {
   size?: number;
   color?: string;
   gradientId?: string;
+  className?: string;
 }
 
-export function KadenBrandMark({ size = 30, color = 'white', gradientId = 'kb-grad' }: Props) {
+export function KadenBrandMark({ size, color = 'white', gradientId = 'kb-grad', className }: Props) {
   const stroke = `url(#${gradientId})`;
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden className="flex-shrink-0">
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden className={`flex-shrink-0${className ? ` ${className}` : ''}`}>
       <defs>
         <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor={color} />

@@ -8,8 +8,8 @@ export function SlideCTA(_props: Props) {
     <div className="w-full max-w-3xl flex flex-col items-center gap-10 text-center px-6">
       {/* Kaden logo — same as sidebar */}
       <div className="animate-fade-up flex flex-col items-center gap-5">
-        <div className="flex items-center gap-4">
-          <KadenBrandMark size={52} color="white" gradientId="cta-kb" />
+        <div className="flex items-center gap-4 sm:gap-6">
+          <KadenBrandMark className="w-12 h-12 sm:w-14 sm:h-14" color="white" gradientId="cta-kb" />
           <span
             className="text-4xl sm:text-5xl font-bold text-white leading-none"
             style={{ fontFamily: "'Michroma', sans-serif", letterSpacing: '0.04em' }}

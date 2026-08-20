@@ -71,8 +71,8 @@ export function SlideHero({ started, onStart }: Props) {
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="relative z-10 flex flex-col items-center text-center gap-5 sm:gap-8 max-w-2xl px-4">
-        <div className="animate-fade-up flex items-center gap-3">
-          <KadenBrandMark size={36} color="white" gradientId="hero-kb" />
+        <div className="animate-fade-up flex items-center gap-4 sm:gap-5">
+          <KadenBrandMark className="w-10 h-10 sm:w-14 sm:h-14" color="white" gradientId="hero-kb" />
           <span className="text-3xl sm:text-5xl font-bold text-white leading-none"
             style={{ fontFamily: "'Michroma', sans-serif", letterSpacing: '0.04em' }}>
             KADEN AI

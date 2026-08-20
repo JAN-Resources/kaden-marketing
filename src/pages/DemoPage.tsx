@@ -2,6 +2,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from 'lucide-react';
 import { DemoSlide } from '../components/demo/DemoSlide';
+import { KadenBrandMark } from '../components/KadenBrandMark';
 import { SlideHero } from '../components/demo/SlideHero';
 import { SlideProblem } from '../components/demo/SlideProblem';
 import { SlidePlatform } from '../components/demo/SlidePlatform';
@@ -235,8 +236,9 @@ export function DemoPage() {
             />
           </div>
 
-          {/* Top bar */}
-          <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-3 pb-2">
+          {/* Top bar — 3-column grid so brand stays perfectly centred */}
+          <div className="absolute top-0 left-0 right-0 grid grid-cols-3 items-start px-5 pt-3 pb-2">
+            {/* Left: volume */}
             <div className="flex flex-col items-start">
               <button
                 onClick={handleVolumeClick}
@@ -250,7 +252,20 @@ export function DemoPage() {
                 {muted ? 'TAP TO ENABLE' : 'AUDIO ON'}
               </span>
             </div>
-            <div className="flex items-center gap-4">
+
+            {/* Centre: Kaden brand — hidden on hero slide (it has its own large one) */}
+            {current !== 0 && (
+              <div className="flex items-center justify-center gap-2 pt-3">
+                <KadenBrandMark className="w-5 h-5" color="rgba(255,255,255,0.45)" gradientId="topbar-kb" />
+                <span className="text-[11px] font-bold tracking-[0.18em] text-white/35" style={{ fontFamily: "'Michroma', sans-serif" }}>
+                  KADEN AI
+                </span>
+              </div>
+            )}
+            {current === 0 && <div />}
+
+            {/* Right: slide counter + pause */}
+            <div className="flex items-center justify-end gap-4 pt-1">
               <span className="text-sm font-mono text-white/35 tabular-nums">
                 {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
               </span>
