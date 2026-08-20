@@ -91,7 +91,7 @@ export function SlideHero({ started, onStart }: Props) {
         {!started ? (
           <button onClick={onStart}
             className="animate-fade-up delay-500 mt-1 inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white text-black font-bold text-sm transition-all hover:bg-white/90 hover:scale-105 active:scale-95 shadow-lg shadow-black/30">
-            Get a Tour
+            Start Tour
             <ChevronRight className="w-4 h-4" />
           </button>
         ) : (
