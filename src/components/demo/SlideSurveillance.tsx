@@ -12,10 +12,10 @@ const fmt = (delta: number) => {
 };
 
 const EVENTS = [
-  { at:0,  color:'#34d399', tag:'WORKER 1', cam:'CAM-01', msg:'Hard hat detected — PPE compliant' },
-  { at:3,  color:'#f59e0b', tag:'WORKER 2', cam:'CAM-01', msg:'No hard hat — safety violation flagged' },
-  { at:6,  color:'#ef4444', tag:'ZONE A',   cam:'CAM-02', msg:'Chemical leak detected — triazene spill' },
-  { at:9,  color:'#f59e0b', tag:'WORKER 2', cam:'CAM-02', msg:'Entering hazard zone — alert sent' },
+  { at:0,  color:'#34d399', tag:'WORKER 1', cam:'CAM-01', msg:'Hard hat detected - PPE compliant' },
+  { at:3,  color:'#f59e0b', tag:'WORKER 2', cam:'CAM-01', msg:'No hard hat - safety violation flagged' },
+  { at:6,  color:'#ef4444', tag:'ZONE A',   cam:'CAM-02', msg:'Chemical leak detected - triazene spill' },
+  { at:9,  color:'#f59e0b', tag:'WORKER 2', cam:'CAM-02', msg:'Entering hazard zone - alert sent' },
   { at:12, color:'#34d399', tag:'SYSTEM',   cam:'SYS',    msg:'Supervisor notified · Response en route' },
 ];
 
@@ -115,7 +115,7 @@ export function SlideSurveillance(_props: Props) {
             {/* Ground */}
             <line x1="0" y1="292" x2="640" y2="292" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
 
-            {/* ── Worker 1 — PPE compliant ── */}
+            {/* ── Worker 1 -PPE compliant ── */}
             <g>
               {/* Marching dashes bbox */}
               <rect x="75" y="98" width="112" height="194"
@@ -153,7 +153,7 @@ export function SlideSurveillance(_props: Props) {
               </text>
             </g>
 
-            {/* ── Worker 2 — NO hard hat ── */}
+            {/* ── Worker 2 -NO hard hat ── */}
             <g style={{ opacity: w2Show ? 1 : 0, transition:'opacity 0.5s' }}>
               <rect x="305" y="92" width="112" height="200"
                 fill="rgba(245,158,11,0.03)" stroke="#f59e0b" strokeWidth="1.6"

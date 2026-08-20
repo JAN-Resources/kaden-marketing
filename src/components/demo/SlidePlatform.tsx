@@ -9,7 +9,7 @@ const SITES = [
 ];
 
 const FEATURES = [
-  { icon: Globe,  label: 'Any location',  desc: 'Remote, onshore, offshore — if there\'s a cellular signal, Kaden connects.' },
+  { icon: Globe,  label: 'Any location',  desc: 'Remote, onshore, offshore - if there\'s a cellular signal, Kaden connects.' },
   { icon: Radio,  label: 'Live data',     desc: 'Reads directly from your field instruments via Modbus every few seconds.' },
   { icon: Cpu,    label: 'Always on',     desc: 'Runs continuously in the cloud. No local hardware or PC needed on-site.' },
 ];

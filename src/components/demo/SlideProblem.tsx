@@ -18,7 +18,7 @@ const PROBLEMS = [
   {
     icon: Clock,
     title: 'Hope for the best',
-    desc: 'No visibility between visits — towers drift out of spec and no one knows.',
+    desc: 'No visibility between visits - towers drift out of spec and no one knows.',
     delay: 'delay-600',
   },
 ];

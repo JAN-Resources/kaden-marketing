@@ -11,7 +11,7 @@ const CONVERSATION = [
   },
   {
     role: 'kaden' as const,
-    text: "Outlet H2S has been 4.2 ppm for the last 2 hours — above the 3.5 ppm spec. Flow rate increased 15% at 08:40 but the dose command hadn't adjusted yet. I've recalculated and bumped the dose from 16.4 → 19.1 gal/day.",
+    text: "Outlet H2S has been 4.2 ppm for the last 2 hours - above the 3.5 ppm spec. Flow rate increased 15% at 08:40 but the dose command hadn't adjusted yet. I've recalculated and bumped the dose from 16.4 to 19.1 gal/day.",
     delay: 1800,
   },
   {
@@ -21,7 +21,7 @@ const CONVERSATION = [
   },
   {
     role: 'kaden' as const,
-    text: "March 14 — a similar flow spike with a 6-hour delay in dose response. Tower efficiency recovered within 2 hours once dosing caught up. Current trajectory looks similar.",
+    text: "March 14 - a similar flow spike with a 6-hour delay in dose response. Tower efficiency recovered within 2 hours once dosing caught up. Current trajectory looks similar.",
     delay: 6200,
   },
 ];
@@ -109,7 +109,7 @@ export function SlideChat(_props: Props) {
       </div>
 
       <p className="animate-fade-up delay-600 text-center text-white/20 text-[10px] font-mono">
-        Kaden knows your live data, history, and configuration — ask anything
+        Kaden knows your live data, history, and configuration - ask anything
       </p>
     </div>
   );

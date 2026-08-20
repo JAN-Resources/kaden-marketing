@@ -82,7 +82,7 @@ export function SlideAlerts(_props: Props) {
         {/* Feature list */}
         <div className="flex flex-col gap-5 max-w-sm">
           {[
-            { icon: Bell,         title: 'Alarm raised',   desc: 'Any tag crossing a threshold sends a text to every configured number — instantly.' },
+            { icon: Bell,         title: 'Alarm raised',   desc: 'Any tag crossing a threshold sends a text to every configured number - instantly.' },
             { icon: MessageSquare,title: 'Reminders',      desc: 'If an alarm stays active, reminders keep firing until someone acts.' },
             { icon: CheckCircle2, title: 'All-clear SMS',  desc: 'When the condition resolves, a cleared notification goes out automatically.' },
           ].map(({ icon: Icon, title, desc }, i) => (

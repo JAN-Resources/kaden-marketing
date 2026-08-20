@@ -52,7 +52,7 @@ export function SlideMonitoring(_props: Props) {
           Real-time field data
         </h2>
         <p className="animate-fade-up delay-200 text-white/40 mt-3 text-base">
-          Direct from your instruments — inlet, outlet, flow, dose command
+          Direct from your instruments - inlet, outlet, flow, dose command
         </p>
       </div>
 

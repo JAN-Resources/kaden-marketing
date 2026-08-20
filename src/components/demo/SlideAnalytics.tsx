@@ -61,7 +61,7 @@ export function SlideAnalytics(_props: Props) {
 
         {/* Dual chart: efficiency + dose */}
         <div className="flex flex-col gap-3">
-          <p className="text-[9px] font-mono text-white/20 uppercase tracking-wider">Daily trends — efficiency & chemical dose</p>
+          <p className="text-[9px] font-mono text-white/20 uppercase tracking-wider">Daily trends - efficiency & chemical dose</p>
           <div className="flex items-end gap-2 h-24">
             {WEEK_DATA.map(({ day, eff, dose }) => (
               <div key={day} className="flex-1 flex flex-col items-center gap-0.5">
@@ -102,7 +102,7 @@ export function SlideAnalytics(_props: Props) {
       </div>
 
       <p className="animate-fade-up delay-600 text-center text-white/20 text-[10px] font-mono">
-        Delivered to your inbox automatically — no manual work required
+        Delivered to your inbox automatically - no manual work required
       </p>
     </div>
   );
