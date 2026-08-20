@@ -1,0 +1,82 @@
+{
+  "voice": "af_heart",
+  "model": "onnx-community/Kokoro-82M-v1.0-ONNX",
+  "speed": 0.94,
+  "clips": {
+    "hero": {
+      "duration": 5.42,
+      "bytes": 43968,
+      "speed": 0.9
+    },
+    "problem": {
+      "duration": 13.29,
+      "bytes": 106752,
+      "speed": 0.94
+    },
+    "platform": {
+      "duration": 7.7,
+      "bytes": 62016,
+      "speed": 0.94
+    },
+    "monitoring": {
+      "duration": 8.87,
+      "bytes": 71424,
+      "speed": 0.94
+    },
+    "scrubber": {
+      "duration": 9.52,
+      "bytes": 76608,
+      "speed": 0.94
+    },
+    "dosing": {
+      "duration": 10.69,
+      "bytes": 86016,
+      "speed": 0.94
+    },
+    "dashboard": {
+      "duration": 13.36,
+      "bytes": 107328,
+      "speed": 0.94
+    },
+    "alerts": {
+      "duration": 6.68,
+      "bytes": 53952,
+      "speed": 0.94
+    },
+    "surveillance": {
+      "duration": 15.13,
+      "bytes": 121536,
+      "speed": 0.94
+    },
+    "chat": {
+      "duration": 9.49,
+      "bytes": 76416,
+      "speed": 0.94
+    },
+    "analytics": {
+      "duration": 8.8,
+      "bytes": 70848,
+      "speed": 0.94
+    },
+    "scheduling": {
+      "duration": 11.97,
+      "bytes": 96192,
+      "speed": 0.94
+    },
+    "marketplace": {
+      "duration": 11.26,
+      "bytes": 90624,
+      "speed": 0.94
+    },
+    "savings": {
+      "duration": 6.12,
+      "bytes": 49344,
+      "speed": 0.9
+    },
+    "cta": {
+      "duration": 4.96,
+      "bytes": 40128,
+      "speed": 0.9
+    }
+  }
+}
