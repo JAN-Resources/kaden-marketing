@@ -51,7 +51,7 @@ export function SlideCTA(_props: Props) {
         <img
           src={`${import.meta.env.BASE_URL}logo/janresources.png`}
           alt="Jan Resources"
-          className="h-6 object-contain mt-1"
+          className="h-10 object-contain mt-1"
           style={{ filter: 'brightness(0) invert(1)' }}
         />
         <p className="text-xs font-mono tracking-widest uppercase text-white/40">
