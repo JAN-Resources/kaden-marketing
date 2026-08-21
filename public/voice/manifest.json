@@ -2,91 +2,109 @@
   "voice": "af_heart",
   "model": "onnx-community/Kokoro-82M-v1.0-ONNX",
   "speed": 0.94,
+  "kbps": 64,
   "clips": {
     "hero": {
       "duration": 5.73,
       "bytes": 46272,
-      "speed": 0.9
+      "speed": 0.9,
+      "fingerprint": "a73021641c54f283"
     },
     "problem": {
       "duration": 13.41,
       "bytes": 107712,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "a2d3db3d5c65773e"
     },
     "platform": {
       "duration": 7.44,
       "bytes": 59904,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "077a98d27ccff26a"
     },
     "monitoring": {
       "duration": 8.82,
       "bytes": 71040,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "da90a905bcceb064"
     },
     "scrubber": {
       "duration": 9.03,
       "bytes": 72768,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "aafef55bdd3c452a"
     },
     "dosing": {
       "duration": 11.38,
       "bytes": 91584,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "e7c9875e147bc0be"
     },
     "dashboard": {
       "duration": 13.14,
       "bytes": 105600,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "21e8730d6871e127"
     },
     "alerts": {
       "duration": 6.44,
       "bytes": 52032,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "fb6ad161034c617f"
     },
     "surveillance": {
       "duration": 14.63,
       "bytes": 117504,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "43e49e079a2e4bcc"
     },
     "chat": {
       "duration": 9.31,
       "bytes": 75072,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "16c738a53c4b8f04"
     },
     "analytics": {
       "duration": 8.51,
       "bytes": 68544,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "a99be108e1885ea0"
     },
     "scheduling": {
       "duration": 11.52,
       "bytes": 92544,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "f4d6a4eac7a1fd61"
     },
     "marketplace": {
       "duration": 10.92,
       "bytes": 87744,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "664d7190b6a3e9e5"
     },
     "security": {
       "duration": 23.5,
       "bytes": 188544,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "55ee6920cb6469d7"
     },
     "savings": {
       "duration": 7.45,
       "bytes": 60096,
-      "speed": 0.9
+      "speed": 0.9,
+      "fingerprint": "c7cf1e004b52a027"
     },
     "requirements": {
       "duration": 21.89,
       "bytes": 175680,
-      "speed": 0.94
+      "speed": 0.94,
+      "fingerprint": "f0769322f97cbb88"
     },
     "cta": {
       "duration": 5.31,
       "bytes": 43008,
-      "speed": 0.9
+      "speed": 0.9,
+      "fingerprint": "c0fb15f3b2c06c60"
     }
   }
 }

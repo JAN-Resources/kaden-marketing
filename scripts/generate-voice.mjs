@@ -31,6 +31,7 @@ import { fileURLToPath } from 'node:url';
 import { KokoroTTS } from 'kokoro-js';
 import lamejs from '@breezystack/lamejs';
 import { NARRATION } from '../src/demo/narration.ts';
+import { SHAPING, speakable, fingerprint } from './voice-shared.mjs';
 
 const ROOT     = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR  = join(ROOT, 'public', 'voice');
@@ -40,33 +41,9 @@ const DTYPE    = process.env.KOKORO_DTYPE ?? 'fp32';
 const SPEED    = Number(process.env.KOKORO_SPEED ?? 0.94);
 const KBPS     = Number(process.env.KOKORO_KBPS ?? 64);
 
-const LEAD_IN_MS  = 120;  // keeps the first syllable from being clipped on play()
-const LEAD_OUT_MS = 260;  // lets the final word settle before the slide turns
-const FADE_MS     = 8;    // removes splice clicks at every join
-const TRIM_FLOOR  = 0.004; // RMS below this counts as Kokoro's own padding
-const TRIM_KEEP_MS= 25;   // margin left around speech so plosives survive
-const HOLD_CLEAR  = 130;  // cap for mid-phrase silence when there is no punctuation
-const HOLD_PUNCT  = 260;  // cap when the sentence has commas/dashes to honour
-const PEAK        = 0.89; // normalisation target, leaves MP3 encoder headroom
-
-/* Pronunciation fixes applied to the spoken text only — the copy in narration.ts
-   and on screen is untouched.
-
-   "H2S" is expanded rather than spelled out. Kokoro breaks for ~230ms between the
-   digit and the trailing letter, which is heard as "H 2. S" — and no spelling
-   avoids it: "H-two-S", "H-2-S", "H two ess" and the raw "H2S" all break in the
-   same place, some worse. Spoken in full the term is continuous, and the only
-   pause left falls at the phrase boundary after it, where a pause belongs.
-
-   A spaced hyphen is read as a word, so those become commas. */
-function speakable(text) {
-  return text
-    .replace(/H2S/g, 'hydrogen sulfide')
-    .replace(/\bPPE\b/g, 'P P E')
-    .replace(/\s+-\s+/g, ', ')   // parenthetical dashes -> comma pauses
-    .replace(/\s{2,}/g, ' ')
-    .trim();
-}
+const { leadInMs: LEAD_IN_MS, leadOutMs: LEAD_OUT_MS, fadeMs: FADE_MS, peak: PEAK,
+        trimFloor: TRIM_FLOOR, trimKeepMs: TRIM_KEEP_MS,
+        holdClear: HOLD_CLEAR, holdPunct: HOLD_PUNCT, gap: GAP } = SHAPING;
 
 /* Keeps terminal punctuation attached so the gap logic can read it. */
 function sentences(text) {
@@ -81,11 +58,11 @@ function gapAfter(sentence, index, all) {
   const ending  = sentence.trim().slice(-1);
 
   if (isLast) return 0;                    // tail silence covers the end of the clip
-  if (ending === '?') return 420;          // let a question sit before answering it
-  if (ending === '!') return 380;
-  if (words <= 3)     return 190;          // "Reactive. Expensive." — staccato
-  if (words <= 6)     return 280;
-  return 340;                              // full thought, full beat
+  if (ending === '?') return GAP.question;  // let a question sit before answering it
+  if (ending === '!') return GAP.exclaim;
+  if (words <= 3)     return GAP.short;     // "Reactive. Expensive." — staccato
+  if (words <= 6)     return GAP.medium;
+  return GAP.long;                          // full thought, full beat
 }
 
 /* Strips the leading/trailing silence Kokoro emits around every utterance, so the
@@ -191,7 +168,7 @@ console.log(`Loading ${MODEL_ID} (dtype=${DTYPE}, voice=${VOICE}, speed=${SPEED}
 const tts = await KokoroTTS.from_pretrained(MODEL_ID, { dtype: DTYPE, device: 'cpu' });
 
 await mkdir(OUT_DIR, { recursive: true });
-const manifest = { voice: VOICE, model: MODEL_ID, speed: SPEED, clips: {} };
+const manifest = { voice: VOICE, model: MODEL_ID, speed: SPEED, kbps: KBPS, clips: {} };
 
 for (const { id, text, speed } of NARRATION) {
   const parts      = sentences(speakable(text));
@@ -214,7 +191,12 @@ for (const { id, text, speed } of NARRATION) {
   const duration = samples.length / sampleRate;
   const mp3      = encodeMp3(samples, sampleRate);
   await writeFile(join(OUT_DIR, `${id}.mp3`), mp3);
-  manifest.clips[id] = { duration: Number(duration.toFixed(2)), bytes: mp3.length, speed: rate };
+  manifest.clips[id] = {
+    duration: Number(duration.toFixed(2)),
+    bytes: mp3.length,
+    speed: rate,
+    fingerprint: fingerprint({ text, voice: VOICE, rate, kbps: KBPS }),
+  };
   console.log(`  ${id.padEnd(13)} ${duration.toFixed(1).padStart(5)}s  ${(mp3.length / 1024).toFixed(0).padStart(4)} KB  ${parts.length} sentence${parts.length > 1 ? 's' : ''} @ ${rate}x`);
 }
 
