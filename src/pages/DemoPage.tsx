@@ -17,6 +17,7 @@ import { SlideAnalytics } from '../components/demo/SlideAnalytics';
 import { SlideScheduling } from '../components/demo/SlideScheduling';
 import { SlideMarketplace } from '../components/demo/SlideMarketplace';
 import { SlideSavings } from '../components/demo/SlideSavings';
+import { SlideSecurity } from '../components/demo/SlideSecurity';
 import { SlideRequirements } from '../components/demo/SlideRequirements';
 import { SlideCTA } from '../components/demo/SlideCTA';
 import { NARRATION } from '../demo/narration';
@@ -37,6 +38,7 @@ const COMPONENTS: Record<string, typeof SlideHero> = {
   scheduling:   SlideScheduling,
   marketplace:  SlideMarketplace,
   savings:      SlideSavings,
+  security:     SlideSecurity,
   requirements: SlideRequirements,
   cta:          SlideCTA,
 };
