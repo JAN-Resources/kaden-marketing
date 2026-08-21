@@ -28,10 +28,11 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        # Kokoro's inference stack (~657MB of onnxruntime and transformers) is only
-        # needed by scripts/generate-voice.mjs, which runs on a developer's machine.
-        # The narration audio is committed, so the deploy never renders it.
-        run: npm install --omit=optional
+        # Plain install. Kokoro's inference stack is ~657MB the deploy never uses,
+        # but --omit=optional is global rather than per-package: rollup ships its
+        # platform native binary as an optionalDependency, so omitting optional
+        # deps takes out rollup's own build engine.
+        run: npm install
 
       - name: Build
         run: npm run build
