@@ -8,5 +8,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react:  ['react', 'react-dom'],
+          motion: ['framer-motion'],
+          icons:  ['lucide-react'],
+        },
+      },
+    },
   },
 });

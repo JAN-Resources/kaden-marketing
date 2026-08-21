@@ -23,10 +23,15 @@ export function useVoice() {
     return el;
   }, []);
 
-  /* Fetches every clip up front. Called from the same user gesture that starts the
-     tour, which also satisfies autoplay policies for the clips that follow. */
+  /* Preloads just the first few clips immediately (satisfies autoplay policy),
+     then progressively loads the rest so the network isn't hammered all at once. */
   const prime = useCallback(() => {
-    NARRATION.forEach(n => getClip(n.id).load());
+    // Load first 3 immediately so the tour starts without any wait
+    NARRATION.slice(0, 3).forEach(n => getClip(n.id).load());
+    // Drip-feed the rest with a small stagger so they don't all race at once
+    NARRATION.slice(3).forEach((n, i) => {
+      setTimeout(() => getClip(n.id).load(), 800 + i * 300);
+    });
   }, [getClip]);
 
   const stopFallback = useCallback(() => {
