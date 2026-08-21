@@ -68,6 +68,11 @@
       "bytes": 87744,
       "speed": 0.94
     },
+    "security": {
+      "duration": 23.5,
+      "bytes": 188544,
+      "speed": 0.94
+    },
     "savings": {
       "duration": 6.92,
       "bytes": 55872,
