@@ -57,7 +57,7 @@ export function SlideRequirements(_props: Props) {
               Don't have everything in place yet?
             </p>
             <p className="text-white/50 text-sm leading-relaxed">
-              No problem. Jan Resources can supply and commission every piece of equipment you need - sensors, PLCs, pumps, and connectivity - end to end.
+              No problem. We can supply and commission every piece of equipment you need - sensors, PLCs, pumps, and connectivity - end to end.
             </p>
             <p className="text-white/50 text-sm leading-relaxed">
               We've done it before. We'll do it for you.
