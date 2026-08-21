@@ -18,7 +18,7 @@ interface Product {
 
 const PRODUCTS: Product[] = [
   {
-    name:       'H2S Scavenger - 55 gallon',
+    name:       'H2S Scavenger',
     category:   'Chemical',
     price:      '$$$',
     stock:      'In Stock',
