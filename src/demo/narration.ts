@@ -15,9 +15,11 @@ export type Narration = {
   speed?: number;
 };
 
+/* The opening line speaks "hydrogen sulfide" in full while the slide shows "H2S" —
+   the term is expanded on first mention and abbreviated from the next slide on. */
 export const NARRATION = [
-  { id: 'hero',         text: 'Meet Kayden AI. Autonomous H2S control for the modern gas field.',                                                                                                                                                        maxDuration: 10000 , speed: 0.90 },
-  { id: 'problem',      text: 'For years, managing H2S meant driving to remote sites, adjusting pumps by hand, and hoping nothing drifted out of spec between visits. Reactive. Expensive. And it still missed things.',                                  maxDuration: 14000 },
+  { id: 'hero',         text: 'Meet Kayden AI. Autonomous hydrogen sulfide control for the modern gas field.',                                                                                                                                                        maxDuration: 10000 , speed: 0.90 },
+  { id: 'problem',      text: 'For years, managing H2S meant driving to remote sites, adjusting pumps by hand, and hoping nothing drifted out of spec between visits. Reactive. Expensive. And still prone to error.',                                  maxDuration: 14000 },
   { id: 'platform',     text: 'Kayden connects to every site you operate - anywhere in the world - and keeps watch around the clock, without a single site visit.',                                                                                       maxDuration: 12000 },
   { id: 'monitoring',   text: 'Every few seconds, Kayden reads your field instruments directly. Inlet H2S, outlet H2S, gas flow - all live, all the time.',                                                                                               maxDuration: 11000 },
   { id: 'scrubber',     text: 'Your scrubber tower, fully instrumented. Kayden watches every zone - packing beds, sump level, inlet and outlet conditions - all in real time.',                                                                           maxDuration: 12000 },

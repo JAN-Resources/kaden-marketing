@@ -4,78 +4,83 @@
   "speed": 0.94,
   "clips": {
     "hero": {
-      "duration": 5.42,
-      "bytes": 43968,
+      "duration": 5.73,
+      "bytes": 46272,
       "speed": 0.9
     },
     "problem": {
-      "duration": 13.29,
-      "bytes": 106752,
+      "duration": 12.9,
+      "bytes": 103680,
       "speed": 0.94
     },
     "platform": {
-      "duration": 7.7,
-      "bytes": 62016,
+      "duration": 7.44,
+      "bytes": 59904,
       "speed": 0.94
     },
     "monitoring": {
-      "duration": 8.87,
-      "bytes": 71424,
+      "duration": 8.71,
+      "bytes": 70080,
       "speed": 0.94
     },
     "scrubber": {
-      "duration": 9.52,
-      "bytes": 76608,
+      "duration": 9.46,
+      "bytes": 76224,
       "speed": 0.94
     },
     "dosing": {
-      "duration": 10.69,
-      "bytes": 86016,
+      "duration": 10.84,
+      "bytes": 87168,
       "speed": 0.94
     },
     "dashboard": {
-      "duration": 13.36,
-      "bytes": 107328,
+      "duration": 13.14,
+      "bytes": 105600,
       "speed": 0.94
     },
     "alerts": {
-      "duration": 6.68,
-      "bytes": 53952,
+      "duration": 6.44,
+      "bytes": 52032,
       "speed": 0.94
     },
     "surveillance": {
-      "duration": 15.13,
-      "bytes": 121536,
+      "duration": 14.63,
+      "bytes": 117504,
       "speed": 0.94
     },
     "chat": {
-      "duration": 9.49,
-      "bytes": 76416,
+      "duration": 9.31,
+      "bytes": 75072,
       "speed": 0.94
     },
     "analytics": {
-      "duration": 8.8,
-      "bytes": 70848,
+      "duration": 8.51,
+      "bytes": 68544,
       "speed": 0.94
     },
     "scheduling": {
-      "duration": 11.97,
-      "bytes": 96192,
+      "duration": 11.52,
+      "bytes": 92544,
       "speed": 0.94
     },
     "marketplace": {
-      "duration": 11.26,
-      "bytes": 90624,
+      "duration": 10.92,
+      "bytes": 87744,
       "speed": 0.94
     },
     "savings": {
-      "duration": 6.12,
-      "bytes": 49344,
+      "duration": 6.92,
+      "bytes": 55872,
       "speed": 0.9
     },
+    "requirements": {
+      "duration": 21.38,
+      "bytes": 171456,
+      "speed": 0.94
+    },
     "cta": {
-      "duration": 4.96,
-      "bytes": 40128,
+      "duration": 4.79,
+      "bytes": 38784,
       "speed": 0.9
     }
   }

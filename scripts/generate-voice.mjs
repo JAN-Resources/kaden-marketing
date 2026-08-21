@@ -17,7 +17,10 @@
         than the one before it and no splice clicks.
    Kokoro pads each utterance with roughly 400ms of its own silence at both ends.
    That padding is trimmed first — otherwise every boundary compounds to over a
-   second and the read drags, which no amount of gap tuning can fix.
+   second and the read drags, which no amount of gap tuning can fix. It also drops
+   the occasional 300ms+ silence into the middle of a phrase, which is heard as a
+   stumble; those are capped, since a pause that long mid-sentence is never
+   something a narrator would do.
 
    The model is downloaded once and cached by transformers.js. Generated audio is
    committed so the site needs no model download at runtime. */
@@ -42,6 +45,8 @@ const LEAD_OUT_MS = 260;  // lets the final word settle before the slide turns
 const FADE_MS     = 8;    // removes splice clicks at every join
 const TRIM_FLOOR  = 0.004; // RMS below this counts as Kokoro's own padding
 const TRIM_KEEP_MS= 25;   // margin left around speech so plosives survive
+const HOLD_CLEAR  = 130;  // cap for mid-phrase silence when there is no punctuation
+const HOLD_PUNCT  = 260;  // cap when the sentence has commas/dashes to honour
 const PEAK        = 0.89; // normalisation target, leaves MP3 encoder headroom
 
 /* Pronunciation fixes applied to the spoken text only — the on-screen copy in
@@ -93,6 +98,39 @@ function trimSilence(clip, sampleRate) {
   const start = Math.max(0, first - keep);
   const stop  = Math.min(clip.length, last + win + keep);
   return stop > start ? clip.subarray(start, stop) : clip;
+}
+
+/* Kokoro sometimes drops an unnatural 300ms+ silence into the middle of a phrase.
+   A sentence with no internal punctuation has nothing to pause for, so anything
+   long is an artifact and gets capped tightly; sentences that do carry commas keep
+   a longer allowance so their real pauses survive. */
+function capInternalSilence(clip, sampleRate, sentence) {
+  const limitMs = /[,;:—-]/.test(sentence.slice(0, -1)) ? HOLD_PUNCT : HOLD_CLEAR;
+  const win     = Math.round(sampleRate * 0.01);
+  const limit   = Math.round((limitMs / 1000) * sampleRate);
+
+  const quiet = [];
+  for (let i = 0; i + win <= clip.length; i += win) {
+    let sum = 0;
+    for (let j = i; j < i + win; j++) sum += clip[j] * clip[j];
+    quiet.push(Math.sqrt(sum / win) < TRIM_FLOOR);
+  }
+
+  const keep = [];
+  let run = 0;
+  for (let w = 0; w < quiet.length; w++) {
+    if (!quiet[w]) { run = 0; keep.push(w); continue; }
+    run += win;
+    if (run <= limit) keep.push(w);   // hold the allowed head of the pause, drop the rest
+  }
+  if (keep.length === quiet.length) return clip;
+
+  const out = new Float32Array(keep.length * win + (clip.length % win));
+  let offset = 0;
+  for (const w of keep) { out.set(clip.subarray(w * win, w * win + win), offset); offset += win; }
+  const remainder = clip.length - quiet.length * win;
+  if (remainder > 0) { out.set(clip.subarray(clip.length - remainder), offset); offset += remainder; }
+  return out.subarray(0, offset);
 }
 
 function silence(ms, sampleRate) {
@@ -158,7 +196,8 @@ for (const { id, text, speed } of NARRATION) {
     const audio = await tts.generate(part, { voice: VOICE, speed: rate });
     sampleRate  = audio.sampling_rate;
     if (i === 0) pieces.push(silence(LEAD_IN_MS, sampleRate));
-    pieces.push(shape(trimSilence(audio.audio, sampleRate), sampleRate));
+    const spoken = capInternalSilence(trimSilence(audio.audio, sampleRate), sampleRate, part);
+    pieces.push(shape(spoken, sampleRate));
     const gap = gapAfter(part, i, parts);
     if (gap) pieces.push(silence(gap, sampleRate));
   }
