@@ -10,7 +10,7 @@ const BLUE   = '#60a5fa';
 const EVENTS = [
   {
     icon:  Droplets,
-    label: 'Triazene Tank 1 - Refill',
+    label: 'H2S Scavenger Tank 1 - Refill',
     date:  'Aug 26',
     daysOut: 6,
     tagColor: AMBER,

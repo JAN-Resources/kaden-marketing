@@ -18,7 +18,7 @@ interface Product {
 
 const PRODUCTS: Product[] = [
   {
-    name:       'Triazene - 55 gal drum',
+    name:       'H2S Scavenger - 55 gallon',
     category:   'Chemical',
     price:      '$$$',
     stock:      'In Stock',

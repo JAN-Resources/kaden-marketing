@@ -46,13 +46,12 @@ export function SlideCTA(_props: Props) {
       </p>
 
       {/* Jan Resources logo */}
-      <div className="animate-fade-up delay-500 flex flex-col items-center gap-2 opacity-25">
+      <div className="animate-fade-up delay-500 flex flex-col items-center gap-2 opacity-80">
         <div className="w-16 h-px bg-white/20" />
         <img
           src={`${import.meta.env.BASE_URL}logo/janresources.png`}
           alt="Jan Resources"
           className="h-10 object-contain mt-1"
-          style={{ filter: 'brightness(0) invert(1)' }}
         />
         <p className="text-xs font-mono tracking-widest uppercase text-white/40">
           Monitoring · Automation · Analytics

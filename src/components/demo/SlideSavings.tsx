@@ -8,7 +8,7 @@ const BENEFITS = [
     accent: '#4ade80',
     label: 'Less chemical waste',
     heading: 'Stop over-dosing',
-    desc: 'Manual dosing between site visits means guessing. Kaden adjusts continuously based on real gas flow and live H2S readings - so you never put in more triazene than the tower actually needs.',
+    desc: 'Manual dosing between site visits means guessing. Kaden adjusts continuously based on real gas flow and live H2S readings - so you never put in more H2S scavenger than the tower actually needs.',
   },
   {
     icon: Clock,

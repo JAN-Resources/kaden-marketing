@@ -201,7 +201,7 @@ export function SlideSurveillance(_props: Props) {
               ))}
               <rect x="484" y="215" width="108" height="16" rx="2.5" fill="rgba(239,68,68,0.9)" />
               <text x="538" y="227" textAnchor="middle" fontSize="9" fontFamily="ui-monospace,monospace" fontWeight="700" fill="white">
-                CHEM LEAK · TRIAZENE · ZONE A
+                CHEM LEAK · H2S SCAV · ZONE A
               </text>
             </g>
 

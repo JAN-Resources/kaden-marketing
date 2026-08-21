@@ -96,7 +96,7 @@ export function SlideDosing(_props: Props) {
         <div className="flex flex-col items-center gap-2">
           {/* Tank */}
           <div className="glass-sm px-5 py-3 flex flex-col items-center gap-1.5 w-32">
-            <div className="text-[9px] font-mono text-white/30 uppercase tracking-wider">Triazine</div>
+            <div className="text-[9px] font-mono text-white/30 uppercase tracking-wider">H2S Scavenger</div>
             <div className="w-full h-12 rounded-md border border-white/10 bg-white/[0.03] relative overflow-hidden">
               <div className="absolute bottom-0 left-0 right-0 bg-white/12 transition-all duration-1000" style={{ height: '68%' }} />
               <div className="absolute inset-x-0 bottom-0 h-1 bg-white/20" />

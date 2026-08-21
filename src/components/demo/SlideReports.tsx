@@ -44,7 +44,7 @@ export function SlideReports(_props: Props) {
         <div className="grid grid-cols-3 gap-3">
           {[
             { label: 'Tower Efficiency',  value: '94.2%',    color: '#4ade80', icon: TrendingUp  },
-            { label: 'Triazine Used',     value: '118 gal',  color: '#60a5fa', icon: BarChart2   },
+            { label: 'H2S Scavenger Used', value: '118 gal',  color: '#60a5fa', icon: BarChart2   },
             { label: 'H2S Compliance',    value: '99.8%',    color: '#a78bfa', icon: FileText    },
           ].map(({ label, value, color, icon: Icon }) => (
             <div key={label} className="glass-sm px-3 py-2.5 flex flex-col gap-1">

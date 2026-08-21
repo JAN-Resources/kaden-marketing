@@ -171,7 +171,7 @@ export function SlideScrubber(_props: Props) {
             { label: 'Inlet H2S',    value: `${inletPpm} ppm`,    sub: 'above packed beds',  side: 'left'  },
             { label: 'Outlet H2S',   value: `${outletPpm} ppm`,   sub: 'treated gas outlet', side: 'right' },
             { label: 'Upper bed',    value: 'Active',              sub: 'packing loaded',     side: 'left'  },
-            { label: 'Lower bed',    value: 'Active',              sub: 'triazine absorbed',  side: 'right' },
+            { label: 'Lower bed',    value: 'Active',              sub: 'scavenger absorbed',  side: 'right' },
             { label: 'Sump level',   value: '42%',                 sub: 'liquid inventory',   side: 'left'  },
           ].map(({ label, value, sub }, i) => (
             <div
