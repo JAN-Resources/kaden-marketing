@@ -49,12 +49,19 @@ const HOLD_CLEAR  = 130;  // cap for mid-phrase silence when there is no punctua
 const HOLD_PUNCT  = 260;  // cap when the sentence has commas/dashes to honour
 const PEAK        = 0.89; // normalisation target, leaves MP3 encoder headroom
 
-/* Pronunciation fixes applied to the spoken text only — the on-screen copy in
-   narration.ts is untouched. Kokoro reads "H2S" as a literal string and treats a
-   spaced hyphen as a word, both of which break the cadence badly. */
+/* Pronunciation fixes applied to the spoken text only — the copy in narration.ts
+   and on screen is untouched.
+
+   "H2S" is expanded rather than spelled out. Kokoro breaks for ~230ms between the
+   digit and the trailing letter, which is heard as "H 2. S" — and no spelling
+   avoids it: "H-two-S", "H-2-S", "H two ess" and the raw "H2S" all break in the
+   same place, some worse. Spoken in full the term is continuous, and the only
+   pause left falls at the phrase boundary after it, where a pause belongs.
+
+   A spaced hyphen is read as a word, so those become commas. */
 function speakable(text) {
   return text
-    .replace(/H2S/g, 'H two S')
+    .replace(/H2S/g, 'hydrogen sulfide')
     .replace(/\bPPE\b/g, 'P P E')
     .replace(/\s+-\s+/g, ', ')   // parenthetical dashes -> comma pauses
     .replace(/\s{2,}/g, ' ')

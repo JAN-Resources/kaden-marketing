@@ -9,8 +9,8 @@
       "speed": 0.9
     },
     "problem": {
-      "duration": 12.9,
-      "bytes": 103680,
+      "duration": 13.41,
+      "bytes": 107712,
       "speed": 0.94
     },
     "platform": {
@@ -19,8 +19,8 @@
       "speed": 0.94
     },
     "monitoring": {
-      "duration": 8.71,
-      "bytes": 70080,
+      "duration": 8.82,
+      "bytes": 71040,
       "speed": 0.94
     },
     "scrubber": {
@@ -29,8 +29,8 @@
       "speed": 0.94
     },
     "dosing": {
-      "duration": 10.84,
-      "bytes": 87168,
+      "duration": 11.38,
+      "bytes": 91584,
       "speed": 0.94
     },
     "dashboard": {
@@ -74,18 +74,18 @@
       "speed": 0.94
     },
     "savings": {
-      "duration": 6.92,
-      "bytes": 55872,
+      "duration": 7.45,
+      "bytes": 60096,
       "speed": 0.9
     },
     "requirements": {
-      "duration": 21.38,
-      "bytes": 171456,
+      "duration": 21.89,
+      "bytes": 175680,
       "speed": 0.94
     },
     "cta": {
-      "duration": 4.79,
-      "bytes": 38784,
+      "duration": 5.31,
+      "bytes": 43008,
       "speed": 0.9
     }
   }
