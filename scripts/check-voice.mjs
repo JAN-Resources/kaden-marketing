@@ -10,8 +10,23 @@ import { readFile } from 'node:fs/promises';
 import { access } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { NARRATION } from '../src/demo/narration.ts';
 import { fingerprint } from './voice-shared.mjs';
+
+/* narration.ts is imported directly so there is one typed source of truth. That
+   relies on Node's built-in type stripping, which needs 22.18 or newer — on older
+   runtimes the module loader throws ERR_UNKNOWN_FILE_EXTENSION, which says nothing
+   useful about what to do next. */
+let NARRATION;
+try {
+  ({ NARRATION } = await import('../src/demo/narration.ts'));
+} catch (err) {
+  if (err?.code === 'ERR_UNKNOWN_FILE_EXTENSION') {
+    console.error(`This check reads src/demo/narration.ts directly, which needs Node 22.18 or newer.`);
+    console.error(`Running Node ${process.version}. Upgrade Node, or skip it with \`npx vite build\`.`);
+    process.exit(1);
+  }
+  throw err;
+}
 
 const ROOT     = join(dirname(fileURLToPath(import.meta.url)), '..');
 const VOICE_DIR = join(ROOT, 'public', 'voice');

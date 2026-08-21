@@ -22,11 +22,16 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # >=22.18 required: scripts/check-voice.mjs imports narration.ts directly,
+          # which needs Node's built-in type stripping. 20 is also EOL.
+          node-version: '24'
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        # Kokoro's inference stack (~657MB of onnxruntime and transformers) is only
+        # needed by scripts/generate-voice.mjs, which runs on a developer's machine.
+        # The narration audio is committed, so the deploy never renders it.
+        run: npm install --omit=optional
 
       - name: Build
         run: npm run build
