@@ -58,11 +58,6 @@ export function SlideScrubber(_props: Props) {
                 <stop offset="0%"  stopColor="rgba(255,255,255,0.18)" />
                 <stop offset="100%" stopColor="rgba(255,255,255,0.06)" />
               </linearGradient>
-              {/* Packing pattern */}
-              <pattern id="packing" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.2" fill="rgba(255,255,255,0.12)" />
-                <circle cx="6" cy="6" r="1.2" fill="rgba(255,255,255,0.08)" />
-              </pattern>
               <clipPath id="towerClip">
                 <rect x="81" y="38" width="78" height="300" />
               </clipPath>
@@ -122,23 +117,14 @@ export function SlideScrubber(_props: Props) {
                 <circle key={x} cx={x} cy={310} r={1.8} fill="rgba(255,255,255,0.3)" className="bubble" style={{ animationDelay: `${i * 0.7}s`, animationDuration: `${2.8 + i * 0.4}s` }} />
               ))}
 
-              {/* Upper packing bed */}
-              <rect x="83" y="88" width="74" height="78" fill="url(#packing)" />
-              <rect x="83" y="88" width="74" height="78" fill="rgba(255,255,255,0.02)" />
-
-              {/* Lower packing bed */}
-              <rect x="83" y="192" width="74" height="78" fill="url(#packing)" />
-              <rect x="83" y="192" width="74" height="78" fill="rgba(255,255,255,0.02)" />
-
               {/* Mist eliminator */}
-              <rect x="83" y="42" width="74" height="12" fill="url(#packing)" opacity="0.7" />
+              <rect x="83" y="42" width="74" height="12" fill="rgba(255,255,255,0.08)" opacity="0.7" />
 
               {/* Counter-current gas flow arrow */}
               <line x1="120" y1="280" x2="120" y2="60" stroke="rgba(255,255,255,0.12)" strokeWidth="1.2" strokeDasharray="3 7" markerEnd="url(#arrowW)" className="dash-flow-slow" />
             </g>
 
-            {/* Support grids */}
-            <line x1="83" y1="168" x2="157" y2="168" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeOpacity="0.7" />
+            {/* Sump boundary */}
             <line x1="83" y1="284" x2="157" y2="284" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeOpacity="0.7" />
 
             {/* Liquid distributor + nozzles */}
@@ -168,11 +154,9 @@ export function SlideScrubber(_props: Props) {
         {/* Tag readouts */}
         <div className="flex flex-col gap-2 sm:gap-3 flex-1 sm:max-w-xs justify-center">
           {[
-            { label: 'Inlet H2S',    value: `${inletPpm} ppm`,    sub: 'above packed beds',  side: 'left'  },
+            { label: 'Inlet H2S',    value: `${inletPpm} ppm`,    sub: 'raw gas inlet',      side: 'left'  },
             { label: 'Outlet H2S',   value: `${outletPpm} ppm`,   sub: 'treated gas outlet', side: 'right' },
-            { label: 'Upper bed',    value: 'Active',              sub: 'packing loaded',     side: 'left'  },
-            { label: 'Lower bed',    value: 'Active',              sub: 'scavenger absorbed',  side: 'right' },
-            { label: 'Sump level',   value: '42%',                 sub: 'liquid inventory',   side: 'left'  },
+            { label: 'Tank level',   value: '42%',                 sub: 'fresh scavenger',    side: 'left'  },
           ].map(({ label, value, sub }, i) => (
             <div
               key={label}
