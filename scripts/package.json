@@ -1,0 +1,11 @@
+{
+  "name": "kaden-voice-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Renders the demo narration with Kokoro. Kept out of the app's dependencies: this pulls ~657MB of onnxruntime and transformers, the narration audio is committed, and the deploy never renders any. Installed on demand by `npm run voice:build`.",
+  "dependencies": {
+    "@breezystack/lamejs": "^1.2.7",
+    "kokoro-js": "^1.2.1"
+  }
+}
